@@ -1,0 +1,7 @@
+test the greetings work
+  user: bring yourself online
+  bot: Hello there!
+
+test good bye
+  user: Good bye
+  bot: Good bye!
