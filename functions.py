@@ -11,13 +11,13 @@ longitude = "0.1272"
 
 def check_today_weather():
     today = datetime.now().strftime("%Y-%m-%d")
-    check_weather_lat_long(latitude, longitude, today)
+    return check_weather_lat_long(latitude, longitude, today)
 
 
 def check_tomorrow_weather():
     today = datetime.now()
     tomorrow = (today + timedelta(days=1)).strftime("%Y-%m-%d")
-    check_weather_lat_long(latitude, longitude, tomorrow)
+    return check_weather_lat_long(latitude, longitude, tomorrow)
 
 
 def check_weather_lat_long(latitude, longitude, day):
@@ -32,17 +32,23 @@ def check_weather_lat_long(latitude, longitude, day):
     data = result.json()
     if "features" not in data:
         return "There is a connection error to the weather API. Please try later"
-
     to_say = ""
     for item in data["features"][0]["properties"]["timeSeries"]:
         if day in item["time"]:
-            to_say +=  "The temperature should be between {int(item['dayLowerBoundMaxTemp'])} and {int(item['dayUpperBoundMaxTemp'])}."
+            to_say += f"The temperature should be between {int(item['dayLowerBoundMaxTemp'])} and {int(item['dayUpperBoundMaxTemp'])}."
             if item["dayProbabilityOfPrecipitation"] != 0:
-                to_say = f"The probability of rain is {item['dayProbabilityOfPrecipitation']} percent."
+                to_say += f"The probability of rain is {item['dayProbabilityOfPrecipitation']} percent."
+
+            else:
+                to_say += "There is no probability of rain."
 
             if item["dayProbabilityOfSnow"] != 0:
-                to_say = f"The probability of snow is {item['dayProbabilityOfSnow']} percent."
+                to_say += f"The probability of snow is {item['dayProbabilityOfSnow']} percent."
 
+            else:
+                to_say += "There is no probability of snow."
+
+    print(to_say)
     return to_say
 
 
