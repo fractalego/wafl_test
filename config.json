@@ -43,15 +43,7 @@
   },
   "text_embedding_model": {
     "model_is_local": false,
-    "local_model": "msmarco-distilbert-base-v3",
-    "remote_model": {
-      "model_host": "localhost",
-      "model_port": 8080
-    }
-  },
-  "qa_embedding_model": {
-    "model_is_local": false,
-    "local_model": "multi-qa-distilbert-dot-v1",
+    "local_model": "TaylorAI/gte-tiny",
     "remote_model": {
       "model_host": "localhost",
       "model_port": 8080
