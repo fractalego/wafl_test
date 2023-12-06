@@ -57,3 +57,15 @@ def get_website(url):
     soup = BeautifulSoup(response.content, "html.parser")
     text = soup.get_text()
     return text
+
+
+def get_time():
+    return datetime.now().strftime("%H:%M")
+
+
+def get_date():
+    return datetime.now().strftime("%Y-%m-%d")
+
+
+def get_day():
+    return datetime.now().strftime("%A")
