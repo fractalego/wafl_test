@@ -6,7 +6,9 @@ facts:
 rules:
   - the user wants to compute some math operation:
     - Think of the python code that solves the math problem and assigns the result to the variable "result"
-    - output exactly the following "<execute>RELEVANT IMPORTS\nRELEVANT CODE\nresult = PYTHON CODE THAT SOLVES THE PROBLEM</execute>"
+    - For example "what is the result of 2 + 2?" should output "<execute>result = 2 + 2</execute>"
+    - Another example "what is the square root of 2?" should output "<execute>import math;result = math.sqrt(2)</execute>"
+    - output exactly the following "<execute>RELEVANT CODE\nresult = PYTHON CODE THAT SOLVES THE PROBLEM</execute>"
 
   - the user wants to know the time:
     - output "The time is <execute>get_time()</execute>".
