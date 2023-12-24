@@ -1,6 +1,7 @@
 import json
+import html2text
+import re
 import requests
-from bs4 import BeautifulSoup
 
 from datetime import datetime, timedelta
 from wafl.exceptions import CloseConversation
@@ -65,11 +66,21 @@ def check_weather_lat_long(latitude, longitude, day):
 
 
 def get_website(url):
-    response = requests.get(url)
-    soup = BeautifulSoup(response.content, "html.parser")
-    text = soup.get_text()
-    text = text.replace("\n", ". ")
-    return "The content of the website is:\n" + text[:1000]
+    text = str(requests.get(url).content)
+    h = html2text.HTML2Text()
+    h.ignore_links = True
+    return h.handle(text).strip()[:1000]
+
+
+def get_guardian_headlines():
+    url = "https://www.theguardian.com/uk"
+    text = str(requests.get(url).content)
+    pattern = re.compile(r'<h4 .*?><span>(.*?)</span></h4>', re.MULTILINE)
+    matches = pattern.findall(text)
+    text = '-' + '\n-'.join(matches)
+    h = html2text.HTML2Text()
+    h.ignore_links = True
+    return h.handle(text).strip()
 
 
 def get_time():
