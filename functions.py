@@ -75,9 +75,9 @@ def get_website(url):
 def get_guardian_headlines():
     url = "https://www.theguardian.com/uk"
     text = str(requests.get(url).content)
-    pattern = re.compile(r'<h4 .*?><span>(.*?)</span></h4>', re.MULTILINE)
+    pattern = re.compile(r"<h4 .*?><span>(.*?)</span></h4>", re.MULTILINE)
     matches = pattern.findall(text)
-    text = '-' + '\n-'.join(matches)
+    text = "-" + "\n-".join(matches)
     h = html2text.HTML2Text()
     h.ignore_links = True
     return h.handle(text).strip()
