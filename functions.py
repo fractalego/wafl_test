@@ -66,7 +66,7 @@ def check_weather_lat_long(latitude, longitude, day):
 
 
 def get_website(url):
-    text = str(requests.get(url).content)
+    text = requests.get(url).content.decode("utf-8")
     h = html2text.HTML2Text()
     h.ignore_links = True
     return h.handle(text).strip()[:1000]
@@ -74,7 +74,7 @@ def get_website(url):
 
 def get_guardian_headlines():
     url = "https://www.theguardian.com/uk"
-    text = str(requests.get(url).content)
+    text = requests.get(url).content.decode("utf-8")
     pattern = re.compile(r"<h4 .*?><span>(.*?)</span></h4>", re.MULTILINE)
     matches = pattern.findall(text)
     text = "-" + "\n-".join(matches)

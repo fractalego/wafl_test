@@ -27,8 +27,8 @@ rules:
 
   - the user wants the news from the guardian website:
     - output exactly "<remember> The guardian headlines are <execute>get_guardian_headlines()</execute></remember>".
-    - use the headlines to create the summary
-    - output the summary by writing it out using bullet points
+    - use the headlines to create a list of bullet points separated by new lines "\n"
+    - output the bullet points to the user in a summarised form
 
   - the user wants to summarise a website:
     - you'll need the website url to summarise
